@@ -12,7 +12,7 @@ fun Route.customerRouting() {
     route("/customer") {
         get {
             var customer = ""
-            PersistentEntityStores.newInstance("/Users/Timofei.Korolev/IdeaProjects/dacha/database").use { entityStore ->
+            PersistentEntityStores.newInstance("./database").use { entityStore ->
                     entityStore.executeInTransaction(
                         StoreTransactionalExecutable { txn: StoreTransaction ->
                             txn.getAll("Customer").forEach { entity ->
@@ -24,7 +24,7 @@ fun Route.customerRouting() {
         }
         post {
             val customer = call.receive<Customer>()
-            PersistentEntityStores.newInstance("/Users/Timofei.Korolev/IdeaProjects/dacha/database").use { entityStore ->
+            PersistentEntityStores.newInstance("./database").use { entityStore ->
                 entityStore.executeInTransaction(
                     StoreTransactionalExecutable { txn: StoreTransaction ->
                         val customerEntity: Entity = txn.newEntity("Customer")
