@@ -36,8 +36,8 @@ resource "aws_security_group_rule" "youtrack_perf_access_80" {
 resource "aws_security_group_rule" "youtrack_perf_access_8080" {
   type = "ingress"
   security_group_id = aws_security_group.youtrack_perf_security_group.id
-  from_port = 8080
-  to_port = 8080
+  from_port = 8088
+  to_port = 8088
   protocol = "TCP"
 
   cidr_blocks = [
