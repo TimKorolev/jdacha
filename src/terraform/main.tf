@@ -29,12 +29,12 @@ resource "aws_instance" "this" {
   }
 
   provisioner "local-exec" {
-    command = "scp -oStrictHostKeyChecking=no -i ${var.os}_${var.os_type}_key.pem youtrack-${var.youtrack_version}.jar ${var.user}@${aws_instance.this.public_dns}:/home/${var.user}/"
+    command = "scp -oStrictHostKeyChecking=no -i ${var.os}_${var.os_type}_key.pem dacha-all.jar ${var.user}@${aws_instance.this.public_dns}:/home/${var.user}/"
   }
 
   provisioner "remote-exec" {
     inline = [
-      "java -jar .jar &"
+      "java -jar dacha-all.jar &"
     ]
 
     connection {
