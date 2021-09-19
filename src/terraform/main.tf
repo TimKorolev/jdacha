@@ -34,7 +34,8 @@ resource "aws_instance" "this" {
 
   provisioner "remote-exec" {
     inline = [
-      "java -jar dacha-all.jar &"
+      "java -jar dacha-all.jar &",
+      "^C"
     ]
 
     connection {
