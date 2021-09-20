@@ -16,7 +16,7 @@ fun Route.customerRouting() {
                     entityStore.executeInTransaction(
                         StoreTransactionalExecutable { txn: StoreTransaction ->
                             txn.getAll("Customer").forEach { entity ->
-                                customer += entity.getProperty("id")
+                                customer += "${entity.getBlobString("json")}, "
                             }
                         })
                 }
@@ -29,6 +29,7 @@ fun Route.customerRouting() {
                     StoreTransactionalExecutable { txn: StoreTransaction ->
                         val customerEntity: Entity = txn.newEntity("Customer")
                         customerEntity.setProperty("id", customer.id)
+                        customerEntity.setBlobString("json", customer.toString())
                     })
             }
             call.respondText("Customer stored correctly", status = HttpStatusCode.Created)
